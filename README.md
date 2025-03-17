@@ -82,3 +82,6 @@ Para aprender mais sobre o desenvolvimento com Expo, confira:
 ---
 
 Feito com 💙 por Luciano.
+
+
+## link para o design de telas -> https://www.canva.com/design/DAGh_Vk3gkg/gQYlSMbkQZTHSlYCPEfhBA/edit?utm_content=DAGh_Vk3gkg&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
