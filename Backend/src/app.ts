@@ -6,10 +6,11 @@ import {
 import type { ZodTypeProvider } from 'fastify-type-provider-zod';
 import { fastifySwagger } from '@fastify/swagger';
 import { fastifySwaggerUi } from '@fastify/swagger-ui';
-import { routes } from './routes';
 import { corsConfig } from './config/cors';
 import { fastifySwaggerConfig, fastifySwaggerUiConfig } from './config/docs';
 import fastifyCors from '@fastify/cors';
+
+import { ClientRoutes } from './routes/Client';
 
 class App {
   readonly app: FastifyInstance;
@@ -33,7 +34,7 @@ class App {
   }
 
   private routes() {
-    this.app.register(routes);
+    this.app.register(ClientRoutes, { prefix: '/clients' });
   }
 }
 
