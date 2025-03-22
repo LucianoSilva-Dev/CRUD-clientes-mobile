@@ -34,7 +34,7 @@ class App {
   }
 
   private routes() {
-    this.app.register(ClientRoutes, { prefix: '/clients' });
+    this.app.register(ClientRoutes, { prefix: '/clients', });
   }
 }
 

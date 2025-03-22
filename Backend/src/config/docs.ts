@@ -8,6 +8,9 @@ export const fastifySwaggerConfig: FastifyDynamicSwaggerOptions = {
       title: 'Backend for CMS (Client Management System)',
       version: '1.0.0',
     },
+    tags: [
+      { name: 'Client', description: 'Client related end-points' },
+    ]
   },
   transform: jsonSchemaTransform
 }
