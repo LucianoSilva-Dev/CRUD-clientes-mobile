@@ -11,6 +11,7 @@ import { fastifySwaggerConfig, fastifySwaggerUiConfig } from './config/docs';
 import fastifyCors from '@fastify/cors';
 
 import { ClientRoutes } from './routes/Client';
+import { AuthRoutes } from './routes/Auth';
 
 class App {
   readonly app: FastifyInstance;
@@ -35,6 +36,7 @@ class App {
 
   private routes() {
     this.app.register(ClientRoutes, { prefix: '/clients', });
+    this.app.register(AuthRoutes, { prefix: '/auth', });
   }
 }
 

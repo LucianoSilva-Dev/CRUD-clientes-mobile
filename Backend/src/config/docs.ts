@@ -10,6 +10,7 @@ export const fastifySwaggerConfig: FastifyDynamicSwaggerOptions = {
     },
     tags: [
       { name: 'Client', description: 'Client related end-points' },
+      { name: 'Auth', description: 'Authentication related end-points' },
     ]
   },
   transform: jsonSchemaTransform

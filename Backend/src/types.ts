@@ -1,6 +1,7 @@
 import type {
   FastifyBaseLogger,
-  FastifyInstance,
+  FastifyReply,
+  FastifyRequest,
   FastifySchema,
   RawReplyDefaultExpression,
   RawRequestDefaultExpression,
@@ -10,7 +11,7 @@ import type {
 } from 'fastify';
 import type { ZodTypeProvider } from 'fastify-type-provider-zod';
 
-type RouteSchema = RouteShorthandOptions<
+export type RouteSchema = RouteShorthandOptions<
   RawServerDefault,
   RawRequestDefaultExpression<RawServerDefault>,
   RawReplyDefaultExpression<RawServerDefault>,
@@ -24,3 +25,10 @@ type RouteSchema = RouteShorthandOptions<
 export type EntitySchema = {
   [key: string]: RouteSchema;
 };
+
+export type ControllerMethod = (
+  request: FastifyRequest,
+  reply: FastifyReply
+) => Promise<void>;
+
+export type Controller = Record<string, ControllerMethod>;
