@@ -2,7 +2,8 @@
   "name": "backend",
   "module": "src/server.ts",
   "scripts": {
-    "dev": "bun --watch run src/server.ts"
+    "dev": "bun --watch run src/server.ts",
+    "debug": "bun --inspect --watch run src/server.ts",
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
