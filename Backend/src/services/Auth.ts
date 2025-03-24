@@ -1,7 +1,7 @@
 // services to handle the business logic of the application
 import type { FastifyReply } from 'fastify';
 import { AuthModel } from '../models/Auth';
-import crypto from 'bcrypt';
+import crypto from 'bcryptjs';
 // biome-ignore lint/style/useImportType: dont care
 import z from 'zod';
 import  type { getTokenBodyValidation, postRegisterBodyValidation } from '../validations/Auth';

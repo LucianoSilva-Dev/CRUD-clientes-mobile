@@ -1,5 +1,14 @@
 import app from './app';
 import mongoose from 'mongoose';
+import { configDotenv } from 'dotenv';
+configDotenv();
+
+export const JWT_SECRET = process.env.JWT_SECRET;
+
+if (!JWT_SECRET) {
+  console.error('JWT_SECRET is not defined');
+  process.exit(1);
+}
 
 const SERVER_PORT = process.env.SERVER_PORT || 3000;
 
