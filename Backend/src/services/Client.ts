@@ -21,8 +21,14 @@ export const ClientService = {
   },
 
   get_all: async () => {
-    const clients = await ClientModel.find();
-    return { success: true, clients };
+    const clients = await ClientModel.find().select('_id name email phone');
+    const formatedClients = clients.map((client) => ({
+      _id: client._id.toString(),
+      name: client.name,
+      email: client.email,
+      phone: client.phone,
+    }));
+    return { success: true, clients: formatedClients };
   },
 
   update: async (clientId: string, client: updateClientBody) => {
