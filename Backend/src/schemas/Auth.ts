@@ -2,7 +2,10 @@
 import type { EntitySchema } from '../types';
 import { genericError } from './Common';
 import z from 'zod';
-import { postRegisterBodyValidation, getTokenBodyValidation } from '../validations/Auth';
+import {
+  postRegisterBodyValidation,
+  getTokenBodyValidation,
+} from '../validations/Auth';
 
 export const tokenResponse = z.object({
   token: z.string(),
@@ -23,6 +26,7 @@ export const AuthSchema: EntitySchema = {
       },
       summary: 'Get the JWT token',
     },
+    attachValidation: true,
   },
 
   register: {
@@ -34,5 +38,6 @@ export const AuthSchema: EntitySchema = {
       },
       summary: 'Register a new user',
     },
-  }
+    attachValidation: true,
+  },
 };

@@ -25,6 +25,7 @@ export const ClientSchema: EntitySchema = {
       },
       summary: 'Get a single client',
     },
+    attachValidation: true,
   },
   get_all: {
     preHandler: [authMiddleware],
@@ -37,6 +38,7 @@ export const ClientSchema: EntitySchema = {
       },
       summary: 'Get all Clients',
     },
+    attachValidation: true,
   },
   register: {
     preHandler: [authMiddleware],
@@ -44,13 +46,9 @@ export const ClientSchema: EntitySchema = {
       response: {
         201: z.object({ id: z.string() }),
         400: genericError,
-        401: genericError,
-        404: genericError,
-        409: genericError,
-        500: genericError,
       },
       summary: 'Register a client',
-    },
+    }
   },
   update: {
     preHandler: [authMiddleware],
@@ -65,6 +63,7 @@ export const ClientSchema: EntitySchema = {
       },
       summary: "Update a client's info",
     },
+    attachValidation: true,
   },
   delete: {
     preHandler: [authMiddleware],
@@ -78,5 +77,6 @@ export const ClientSchema: EntitySchema = {
       },
       summary: 'Delete a client',
     },
+    attachValidation: true,
   },
 };
