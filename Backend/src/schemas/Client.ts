@@ -2,8 +2,9 @@
 import type { EntitySchema } from '../types';
 import z from 'zod';
 import { idValidation, idAsStringValidation } from '../validations/Commom';
-import { genericError } from '../schemas/Common';
+import { genericError, schemaValidationError } from '../schemas/Common';
 import { authMiddleware } from '../plugins/Auth';
+import { registerBodyValidation, updateBodyValidation } from '../validations/Client';
 
 export const singleClientResponse = z.object({
   _id: z.string(),
@@ -16,36 +17,40 @@ export const ClientSchema: EntitySchema = {
   get: {
     preHandler: [authMiddleware], // fecha a rota
     schema: {
+      params: idValidation,
       response: {
         200: singleClientResponse,
-        400: genericError,
+        400: schemaValidationError,
         401: genericError,
         404: genericError,
         500: genericError,
       },
       summary: 'Get a single client',
-    },
-    attachValidation: true,
+    }
   },
   get_all: {
     preHandler: [authMiddleware],
     schema: {
       response: {
         200: singleClientResponse.array(),
-        400: genericError,
+        400: schemaValidationError,
         401: genericError,
         500: genericError,
       },
       summary: 'Get all Clients',
-    },
-    attachValidation: true,
+    }
   },
   register: {
     preHandler: [authMiddleware],
     schema: {
+      body: registerBodyValidation,
       response: {
         201: z.object({ id: z.string() }),
-        400: genericError,
+        400: schemaValidationError,
+        401: genericError,
+        404: genericError,
+        409: genericError,
+        500: genericError,
       },
       summary: 'Register a client',
     }
@@ -53,30 +58,30 @@ export const ClientSchema: EntitySchema = {
   update: {
     preHandler: [authMiddleware],
     schema: {
+      body: updateBodyValidation,
       response: {
         200: singleClientResponse,
-        400: genericError,
+        400: schemaValidationError,
         401: genericError,
         404: genericError,
         409: genericError,
         500: genericError,
       },
       summary: "Update a client's info",
-    },
-    attachValidation: true,
+    }
   },
   delete: {
     preHandler: [authMiddleware],
     schema: {
+      params: idValidation,
       response: {
         204: z.null(),
-        400: genericError,
+        400: schemaValidationError,
         401: genericError,
         404: genericError,
         500: genericError,
       },
       summary: 'Delete a client',
-    },
-    attachValidation: true,
+    }
   },
 };

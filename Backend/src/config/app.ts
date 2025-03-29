@@ -3,6 +3,6 @@ import { schemaErrorFormater } from "../plugins/schemaErrorFormater";
 
 
 export const appConfig: FastifyServerOptions = {
-    logger: true,
+    //logger: true,
     schemaErrorFormatter: schemaErrorFormater
 };

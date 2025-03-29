@@ -1,14 +1,11 @@
 import type { FastifyReply } from 'fastify';
 import { ClientModel } from '../models/Client';
-// biome-ignore lint/style/useImportType: inevitable
 import z from 'zod';
 import type {
   updateBodyValidation,
   registerBodyValidation,
 } from '../validations/Client';
-
-type updateClientBody = z.infer<typeof updateBodyValidation>;
-type registerClientBody = z.infer<typeof registerBodyValidation>;
+import type { registerClientBody, updateClientBody } from '../types';
 
 export const ClientService = {
   get: async (clientId: string) => {

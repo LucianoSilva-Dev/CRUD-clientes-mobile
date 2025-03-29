@@ -1,10 +1,10 @@
 // zod schemas for validation and response of the routes
 import type { EntitySchema } from '../types';
-import { genericError } from './Common';
+import { genericError, schemaValidationError } from './Common';
 import z from 'zod';
 import {
-  postRegisterBodyValidation,
-  getTokenBodyValidation,
+  postRegisterAuthBodyValidation,
+  getTokenAuthBodyValidation,
 } from '../validations/Auth';
 
 export const tokenResponse = z.object({
@@ -18,26 +18,24 @@ export const userRegisterResponse = z.object({
 export const AuthSchema: EntitySchema = {
   getToken: {
     schema: {
-      body: getTokenBodyValidation,
+      body: getTokenAuthBodyValidation,
       response: {
         200: tokenResponse,
-        400: genericError,
+        400: schemaValidationError,
         401: genericError,
       },
       summary: 'Get the JWT token',
-    },
-    attachValidation: true,
+    }
   },
 
   register: {
     schema: {
-      body: postRegisterBodyValidation,
+      body: postRegisterAuthBodyValidation,
       response: {
         201: userRegisterResponse,
-        400: genericError,
+        400: schemaValidationError
       },
       summary: 'Register a new user',
-    },
-    attachValidation: true,
+    }
   },
 };

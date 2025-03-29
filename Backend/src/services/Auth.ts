@@ -2,15 +2,12 @@
 import type { FastifyReply } from 'fastify';
 import { AuthModel } from '../models/Auth';
 import crypto from 'bcryptjs';
-// biome-ignore lint/style/useImportType: dont care
 import z from 'zod';
-import  type { getTokenBodyValidation, postRegisterBodyValidation } from '../validations/Auth';
+import type { getTokenAuthBody, registerAuthBody } from '../types';
 
-type UserCredentials = z.infer<typeof getTokenBodyValidation>;
-type User = z.infer<typeof postRegisterBodyValidation>;
 
 export const AuthService = {
-  getToken: async (userCredentials: UserCredentials, reply: FastifyReply) => {
+  getToken: async (userCredentials: getTokenAuthBody, reply: FastifyReply) => {
     const { email, password } = userCredentials;
     const user = await AuthModel.findOne({ email});
     if (!user) {
@@ -25,7 +22,7 @@ export const AuthService = {
     return { auth: true, token: jwt };
   },
 
-  register: async (User: User, reply: FastifyReply) => {
+  register: async (User: registerAuthBody) => {
     const { name, email, password } = User;
 
     const user = await AuthModel.findOne({ email });

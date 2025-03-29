@@ -1,13 +1,13 @@
 import z from 'zod';
 
-export const getTokenBodyValidation = z.object({
+export const getTokenAuthBodyValidation = z.object({
   email: z
     .string({ message: 'o campo email precisa ser uma string.' })
     .email('email inválido'),
   password: z.string({ message: 'o campo senha precisa ser uma string.' }),
 });
 
-export const postRegisterBodyValidation = z.object({
+export const postRegisterAuthBodyValidation = z.object({
   name: z.string({ message: 'o campo nome precisa ser uma string.' }),
   email: z
     .string({ message: 'o campo email precisa ser uma string.' })

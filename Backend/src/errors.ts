@@ -1,3 +1,5 @@
+import type { ResponseSerializationError } from "fastify-type-provider-zod";
+import type { FastifySchemaValidationError } from "fastify/types/schema";
 import type { ZodError } from "zod";
 
 export type ValidationErrorResponse = {
@@ -8,7 +10,7 @@ export type GenericErrorResponse = {
   error: string;
 };
 
-class CustomError extends Error {
+abstract class CustomError extends Error {
   constructor(public message: string, public statusCode: number) {
     super(message);
     if ("captureStackTrace" in Error) {
@@ -19,14 +21,14 @@ class CustomError extends Error {
   }
 }
 
-export class  InputValidationError extends CustomError {
-  constructor(public statusCode: number, public error: ZodError) {
-    super('Input Validation Error', statusCode);
+export class  SchemaValidationError extends CustomError {
+  constructor(public errors: FastifySchemaValidationError[]) {
+    super('Input Validation Error', 400);
   }
 }
 
 export class ResponseValidationError extends CustomError {
-  constructor() {
+  constructor(public error: ResponseSerializationError) {
     super('Response Validation Error', 500);
   }
 }
