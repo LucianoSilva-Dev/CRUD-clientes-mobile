@@ -1,21 +1,19 @@
 import React from 'react';
-import { 
-  View, 
-  Text, 
-  Image, 
-  StyleSheet, 
-  TouchableOpacity, 
-  SafeAreaView, 
-  StatusBar 
-} from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, StatusBar } from 'react-native';
+import { useRouter } from 'expo-router';
 
-const App = () => {
+// CAMINHOS CORRIGIDOS
+import Button from '../../components/Button';
+import { Colors } from '../../constants/Colors';
+
+export default function LoginScreen() {
+  const router = useRouter();
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
 
       <View style={styles.topSection}>
-
         <Text style={styles.title}>Pense</Text>
         <Text style={styles.title}>ilimitadamente!</Text>
         <Text style={styles.subtitle}>Seja melhor que</Text>
@@ -25,18 +23,25 @@ const App = () => {
       <View style={styles.bottomSection}>
         <Text style={styles.greeting}>Olá, Adm!</Text>
 
-        <TouchableOpacity style={styles.loginButton}>
-          <Text style={styles.loginText}>Login</Text>
-        </TouchableOpacity>
+        <Button
+          title="Login"
+          onPress={() => router.push('/explore')}
+          variant="primary"
+          style={{ width: '80%', marginBottom: 15 }}
+        />
 
-        <TouchableOpacity style={styles.registerButton}>
-          <Text style={styles.registerText}>Cadastrar</Text>
-        </TouchableOpacity>
+        <Button
+          title="Cadastrar"
+          onPress={() => { /* Lógica de cadastro */ }}
+          variant="outline"
+          style={{ width: '80%', borderColor: Colors.light.danger }}
+        />
       </View>
     </SafeAreaView>
   );
 };
 
+// ... (estilos permanecem os mesmos)
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -47,30 +52,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  logo: {
-    width: 120,
-    height: 120,
-    marginBottom: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 4, height: 4 },
-    shadowOpacity: 0.4,
-    shadowRadius: 6,
-    elevation: 8,
-  },
   title: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#4A1EC4',
+    color: Colors.light.secondary,
     textAlign: 'center',
   },
   subtitle: {
     fontSize: 16,
-    color: '#4A1EC4',
+    color: Colors.light.secondary,
     textAlign: 'center',
   },
   bottomSection: {
     flex: 1.2,
-    backgroundColor: '#1f213a',
+    backgroundColor: Colors.light.darkBackground,
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
     alignItems: 'center',
@@ -82,32 +77,4 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 30,
   },
-  loginButton: {
-    backgroundColor: '#5B17E5',
-    width: '80%',
-    paddingVertical: 14,
-    borderRadius: 10,
-    alignItems: 'center',
-    marginBottom: 15,
-  },
-  loginText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  registerButton: {
-    borderColor: '#FF4D67',
-    borderWidth: 2,
-    width: '80%',
-    paddingVertical: 14,
-    borderRadius: 10,
-    alignItems: 'center',
-  },
-  registerText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
 });
-
-export default App;
